@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listeners</title>
+    <style>
+        body {
+            font-size: 20px;
+        }
+        
+        button {
+            height: 50px;
+            width: 200px;
+            font-size: 20px;
+        }
+        
+        .sqr {
+            width: 300px;
+            height: 300px;
+            background-color: orange;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <button>Mouseover</button>
+    <p>Press any key</p>
+    <p id="text">
+        I will change
+    </p>
+    <div class="sqr"></div>
+    <p>Window resized <span id="demo">0</span> times.</p>
+    <!-- <video width="220" height="140" controls> 
+            <source src="movie.mp4" type="video/mp4">
+            <source src="movie.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+          </video>* -->
+    <script>
+        var btn = document.querySelector('button');
+        var txt = document.querySelector('text');
+
+        function random(number) {
+            return Math.floor(Math.random() * (number + 1));
+        }
+
+        btn.onclick = function() {
+            var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+            this.style.backgroundColor = rndCol;
+        }
+
+        btn.addEventListener("mouseover", function(event) {
+            event.target.style.color = "orange";
+        }, false);
+
+        btn.onmouseout = function() {
+            btn.textContent = "Click and dblclick";
+        };
+
+        btn.ondblclick = function() {
+            dblclick()
+        };
+
+        function dblclick() {
+            alert("Hello,  Yura!");
+        };
+        //changed keydown on keypress because was working onfocus
+        window.addEventListener("keypress", function() {
+            var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+            document.body.style.backgroundColor = rndCol;
+        });
+
+        function focus() {
+            btn.style.borderColor = "red";
+        }
+        btn.addEventListener("focus", focus);
+
+        document.getElementById("video").addEventListener("load", myFunction);
+
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "Iframe is loaded.";
+        }
+
+        window.addEventListener("resize", Resize);
+
+        var x = 0;
+
+        function Resize() {
+            var txt = x += 1;
+            document.getElementById("demo").innerHTML = txt;
+        }
+
+        /* function bgChange(e) {
+             var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+             e.target.style.backgroundColor = rndCol;
+             console.log(e);
+         }
+
+
+         btn.addEventListener('click', bgChange);*/
+    </script>
+</body>
+
+</html>
