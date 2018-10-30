@@ -20,28 +20,84 @@
             width: 300px;
             height: 300px;
             background-color: orange;
+            transition: all ease-in 1s;
+        }
+        
+        img {
+            width: 100px;
+        }
+        
+        #hh {
+            height: 150px;
+            width: 150px;
+            padding: 20px;
+            transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 3s;
+        }
+        
+        #but {
+            height: 50px;
+            width: 50px;
+            visibility: hidden;
+        }
+        
+        .slideUp {
+            animation-name: slideUp;
+            -webkit-animation-name: slideUp;
+            animation-duration: 1s;
+            -webkit-animation-duration: 1s;
+            visibility: visible;
+        }
+        
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateY(70%);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: translateY(0%);
+            }
+        }
+        
+        @-webkit-keyframes slideUp {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateY(70%);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: translateY(0%);
+            }
+        }
+        
+        body {
+            scroll-behavior: smooth;
         }
     </style>
 
 </head>
 
 <body>
-
-    <button>Mouseover</button>
+    <img id="hh" src="https://js.cx/clipart/yozhik.jpg?speed=1">
+    <button>Mouseover</button><br>
+    <img src="but.svg" id="but"><br>
+    <img src="cat.svg" id="draggable" draggable="true">
+    <span>Put me to the square</span>
+    <div class="sqr">
+        <p id="text">
+            I will change after welling on me
+        </p>
+    </div>
     <p>Press any key</p>
-    <p id="text">
-        I will change
-    </p>
-    <div class="sqr"></div>
-    <p>Window resized <span id="demo">0</span> times.</p>
-    <!-- <video width="220" height="140" controls> 
-            <source src="movie.mp4" type="video/mp4">
-            <source src="movie.ogg" type="video/ogg">
-            Your browser does not support the video tag.
-          </video>* -->
+    <p>Try to resize the browser window.</p>
+
+
     <script>
         var btn = document.querySelector('button');
         var txt = document.querySelector('text');
+        var sqr = document.querySelector('.sqr');
+        var hh = document.querySelector('#hh');
+        var but = document.querySelector('#but');
 
         function random(number) {
             return Math.floor(Math.random() * (number + 1));
@@ -72,27 +128,85 @@
             var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
             document.body.style.backgroundColor = rndCol;
         });
-
+        //смена при Tabe
         function focus() {
             btn.style.borderColor = "red";
         }
         btn.addEventListener("focus", focus);
 
-        document.getElementById("video").addEventListener("load", myFunction);
+        //Drag/dropp
 
-        function myFunction() {
-            document.getElementById("demo").innerHTML = "Iframe is loaded.";
+        document.addEventListener("dragstart", function(event) {
+            event.dataTransfer.setData("Text", event.target.id);
+
+        });
+        document.addEventListener("dragover", function(event) {
+            event.preventDefault();
+        });
+        document.addEventListener("drop", function(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("Text");
+            event.target.appendChild(document.getElementById(data));
+            event.target.style.backgroundColor = "green";
+        });
+
+        //при прокрутке на квадрате
+        sqr.addEventListener("wheel", welling);
+
+        function welling() {
+            this.style.transform = "rotate(180deg)";
         }
 
-        window.addEventListener("resize", Resize);
+        // сработает по окончании анимации
+        sqr.addEventListener("transitionend", function() {
+            sqr.style.height = "200px";
+        });
 
-        var x = 0;
 
-        function Resize() {
-            var txt = x += 1;
-            document.getElementById("demo").innerHTML = txt;
+        // сработает по окончании загрузки
+
+        window.onload = function() {
+            hh.style.transform = "translateX(600px)"; // сработает по окончании загрузки
+            // создаем новый элемент div
+            // и добавляем в него немного контента
+            var newDiv = document.createElement("div");
+            newDiv.innerHTML = "<h1>Loaded!</h1>";
+            // добавляем только что созданый элемент в дерево DOM
+            document.body.insertBefore(newDiv, hh);
+
+        };
+
+        //resise window
+
+        window.onresize = function() {
+            sqr.style.width = "200px";
         }
 
+        /* butterfly on cursor
+
+        document.onmousemove = function(event) {
+            but.style.position = "fixed";
+            but.style.left = event.clientX + "px";
+            but.style.top = event.clientY + "px";
+        }*/
+
+        //scroll
+        window.onscroll = function() {
+            mscrolling()
+        };
+
+        function mscrolling() {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                but.className = "slideUp";
+            } else {
+                but.className = "";
+            }
+        }
+        /*window.scrollTo({
+    top: 1000,
+    behavior: "smooth"
+});
+*/
         /* function bgChange(e) {
              var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
              e.target.style.backgroundColor = rndCol;
