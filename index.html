@@ -34,7 +34,7 @@
             transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 3s;
         }
         
-        #but {
+        .but {
             height: 50px;
             width: 50px;
             visibility: hidden;
@@ -51,7 +51,7 @@
         @keyframes slideUp {
             0% {
                 opacity: 0;
-                -webkit-transform: translateY(70%);
+                -webkit-transform: translateY(170%);
             }
             100% {
                 opacity: 1;
@@ -62,7 +62,7 @@
         @-webkit-keyframes slideUp {
             0% {
                 opacity: 0;
-                -webkit-transform: translateY(70%);
+                -webkit-transform: translateY(170%);
             }
             100% {
                 opacity: 1;
@@ -97,7 +97,7 @@
         var txt = document.querySelector('text');
         var sqr = document.querySelector('.sqr');
         var hh = document.querySelector('#hh');
-        var but = document.querySelector('#but');
+        var but = document.querySelector('.but');
 
         function random(number) {
             return Math.floor(Math.random() * (number + 1));
@@ -195,11 +195,9 @@
             mscrolling()
         };
 
-        function mscrolling() {
+       function mscrolling() {
             if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                but.className = "slideUp";
-            } else {
-                but.className = "";
+                but.classList.toggle("slideUp");
             }
         }
         /*window.scrollTo({
