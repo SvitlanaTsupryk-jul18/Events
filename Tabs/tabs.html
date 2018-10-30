@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs</title>
+    <style>
+        /* Style the tab */
+        
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: yellow;
+            width: 60%;
+        }
+        /* Style the buttons that are used to open the tab content */
+        
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 20px;
+        }
+        /* Change background color of buttons on hover */
+        
+        .tab button:hover {
+            background-color: orange;
+        }
+        /* Create an active/current tablink class */
+        
+        .tab button:active {
+            background-color: orangered;
+        }
+        /* Style the tab content */
+        
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+            width: 60%;
+            animation: fadeEffect 1s;
+            /* Fading effect takes 1 second */
+        }
+        /* Go from zero to full opacity */
+        
+        .active {
+            display: block;
+        }
+        
+        @keyframes fadeEffect {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Tab links -->
+    <div class="tab">
+        <button class="tablinks" data-item="1" id="defaultOpen">London</button>
+        <button class="tablinks" data-item="2">Paris</button>
+        <button class="tablinks" data-item="3">Tokyo</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="London" class="tabcontent" data-item="1">
+        <h3>London</h3>
+        <p>London is the capital city of England.</p>
+    </div>
+
+    <div id="Paris" class="tabcontent" data-item="2">
+        <h3>Paris</h3>
+        <p>Paris is the capital of France.</p>
+    </div>
+
+    <div id="Tokyo" class="tabcontent" data-item="3">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
+    <script>
+        var tab = document.querySelectorAll('.tablinks');
+        var cont = document.querySelectorAll('.tabcontent');
+        var k = tab.length;
+        for (var i = 0; i <= k; i++) {
+            tab[i].addEventListener("click", show);
+            console.log(tab[i].dataset.item);
+        }
+
+        function show() {
+            if (tab[i].dataset.item = cont[i].dataset.item) {
+                cont.classList.toggle("active");
+            }
+        }
+
+
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+</body>
+
+</html>
