@@ -80,7 +80,7 @@
 <body>
     <img id="hh" src="https://js.cx/clipart/yozhik.jpg?speed=1">
     <button>Mouseover</button><br>
-    <img src="but.svg" id="but"><br>
+    <img src="but.svg" class="but"><br>
     <img src="cat.svg" id="draggable" draggable="true">
     <span>Put me to the square</span>
     <div class="sqr">
@@ -91,6 +91,11 @@
     <p>Press any key</p>
     <p>Try to resize the browser window.</p>
 
+    <p>This example uses the addEventListener() method to attach a "select" event to an input element.</p>
+
+    Select some text: <input type="text" value="Hello world!" id="myText">
+
+    <p id="demo"></p>
 
     <script>
         var btn = document.querySelector('button');
@@ -190,21 +195,46 @@
             but.style.top = event.clientY + "px";
         }*/
 
-        //scroll
+        //scroll1
         window.onscroll = function() {
             mscrolling()
         };
 
-       function mscrolling() {
+        function mscrolling() {
             if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
                 but.classList.toggle("slideUp");
             }
         }
+        //scroll2
+        /*window.onscroll = function() {
+            scrolling()
+        };
+
+        function scrolling() {
+            if (document.body.scrollTop > 350 ) {
+                document.getElementById("myImg").className = "slideUp";
+            }
+        }*/
+
+
+        //select
+
+        document.getElementById("myText").addEventListener("select", myFunction);
+
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "You selected some text!";
+            document.getElementById("myText").style.backgroundColor = "red";
+        }
+
+
+
+
         /*window.scrollTo({
-    top: 1000,
-    behavior: "smooth"
-});
-*/
+            top: 1000,
+            behavior: "smooth"
+        }); */
+
+
         /* function bgChange(e) {
              var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
              e.target.style.backgroundColor = rndCol;
@@ -216,4 +246,4 @@
     </script>
 </body>
 
-</html>
+</html
