@@ -68,42 +68,41 @@
 <body>
     <!-- Tab links -->
     <div class="tab">
-        <button class="tablinks" data-item="1" id="defaultOpen">London</button>
-        <button class="tablinks" data-item="2">Paris</button>
-        <button class="tablinks" data-item="3">Tokyo</button>
+        <button type="button" class="tablinks" data-item="1" id="defaultOpen">London</button>
+        <button type="button" class="tablinks" data-item="2">Paris</button>
+        <button type="button" class="tablinks" data-item="3">Tokyo</button>
     </div>
 
     <!-- Tab content -->
-    <div id="London" class="tabcontent" data-item="1">
-        <h3>London</h3>
-        <p>London is the capital city of England.</p>
-    </div>
+    <div class="content">
+        <div id="London" class="tabcontent" data-item="1">
+            <h3>London</h3>
+            <p>London is the capital city of England.</p>
+        </div>
 
-    <div id="Paris" class="tabcontent" data-item="2">
-        <h3>Paris</h3>
-        <p>Paris is the capital of France.</p>
-    </div>
+        <div id="Paris" class="tabcontent" data-item="2">
+            <h3>Paris</h3>
+            <p>Paris is the capital of France.</p>
+        </div>
 
-    <div id="Tokyo" class="tabcontent" data-item="3">
-        <h3>Tokyo</h3>
-        <p>Tokyo is the capital of Japan.</p>
+        <div id="Tokyo" class="tabcontent" data-item="3">
+            <h3>Tokyo</h3>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
     </div>
     <script>
-        var tab = document.querySelectorAll('.tablinks');
-        var cont = document.querySelectorAll('.tabcontent');
-        var k = tab.length;
-        for (var i = 0; i <= k; i++) {
+        var tab = document.querySelectorAll('[data-item]');
+        var cont = document.querySelector('.content');
+        var tabLength = tab.length;
+
+        for (var i = 0; i < tabLength; i++) {
             tab[i].addEventListener("click", show);
-            console.log(tab[i].dataset.item);
         }
 
         function show() {
-            if (tab[i].dataset.item = cont[i].dataset.item) {
-                cont.classList.toggle("active");
-            }
-        }
-
-
+            let c = 'data-item =' + '"' + this.dataset.item + '"';
+            cont.querySelector("[" + c + "]").classList.toggle("active");
+        };
 
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
