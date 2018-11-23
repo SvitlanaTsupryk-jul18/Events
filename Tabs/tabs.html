@@ -75,7 +75,7 @@
 
     <!-- Tab content -->
     <div class="content">
-        <div id="London" class="tabcontent" data-item="1">
+        <div id="London" class="tabcontent show" data-item="1">
             <h3>London</h3>
             <p>London is the capital of England.</p>
         </div>
@@ -97,7 +97,6 @@
         var tabcontent = cont.querySelectorAll('.tabcontent');
         for (var i = 0; i < tabLength; i++) {
             tab[i].addEventListener("click", show);
-
         }
 
         function show() {
