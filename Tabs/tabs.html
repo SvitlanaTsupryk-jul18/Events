@@ -94,18 +94,22 @@
         var tab = document.querySelectorAll('[data-item]');
         var cont = document.querySelector('.content');
         var tabLength = tab.length;
-
+        var tabcontent = cont.querySelectorAll('.tabcontent');
         for (var i = 0; i < tabLength; i++) {
             tab[i].addEventListener("click", show);
+
         }
 
         function show() {
-            let c = 'data-item =' + '"' + this.dataset.item + '"';
-            cont.querySelector("[" + c + "]").classList.toggle("active");
-        };
+            for (var j = 0; j < tabcontent.length; j++) {
+                tabcontent[j].classList.remove("show");
+                console.log(tabcontent[j]);
+            }
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
+            let c = 'data-item =' + '"' + this.dataset.item + '"';
+            cont.querySelector("[" + c + "]").classList.add("show");
+            console.log(c);
+        };
     </script>
 </body>
 
